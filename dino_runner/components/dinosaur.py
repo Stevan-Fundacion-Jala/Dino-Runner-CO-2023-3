@@ -1,11 +1,12 @@
-import pygame
+import keyboard
 from dino_runner.utils.constants import JUMPING, RUNNING, DUCKING
-
 class Dinosaur:
   X_POS = 80
   Y_POS = 310
   Y_POS_DUCK = 345
   JUMP_VEL = 8.5
+  BOTTOM_JUMP = "space"
+  BOTTOM_DUCK = "down"
   
   def __init__(self):
     self.image = RUNNING[0]
@@ -18,16 +19,16 @@ class Dinosaur:
     self.dino_jump = False
     self.jump_vel = self.JUMP_VEL
   
-  def update(self,user_input):
+  def update(self):
     if self.dino_run: self.run()
     elif self.dino_duck: self.duck()
     else: self.jump()
     
-    if user_input[pygame.K_DOWN] and not self.dino_jump:
+    if keyboard.is_pressed(self.BOTTOM_DUCK) and not self.dino_jump:
       self.dino_run = False
       self.dino_duck = True
       self.dino_jump = False
-    elif user_input[pygame.K_x] and not self.dino_jump:
+    elif keyboard.is_pressed(self.BOTTOM_JUMP) and not self.dino_jump:
       self.dino_run = False
       self.dino_duck = False
       self.dino_jump = True
