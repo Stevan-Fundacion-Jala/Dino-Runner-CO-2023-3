@@ -1,5 +1,6 @@
 import keyboard
-from dino_runner.utils.constants import JUMPING, RUNNING, DUCKING
+from dino_runner.utils.constants import JUMPING, RUNNING, DUCKING, DEAD
+
 class Dinosaur:
   X_POS = 80
   Y_POS = 310
@@ -18,9 +19,14 @@ class Dinosaur:
     self.dino_duck = False
     self.dino_jump = False
     self.jump_vel = self.JUMP_VEL
+    self.dino_dead = False
+    self.rect_y_obstacle = 0
+    self.rect_x_obstacle = 0
+    self.collider = False
   
   def update(self):
-    if self.dino_run: self.run()
+    if self.dino_dead: self.dead()
+    elif self.dino_run: self.run()
     elif self.dino_duck: self.duck()
     else: self.jump()
     
@@ -42,7 +48,16 @@ class Dinosaur:
   
   def draw(self,screen):
     screen.blit(self.image,self.dino_rect)
-  
+    
+  def dead(self):
+    self.image = DEAD
+    if self.dino_duck:
+      self.dino_rect.x = self.X_POS + 30
+      self.dino_rect.y = self.Y_POS
+    elif (self.dino_rect.y < self.Y_POS) and (self.collider):
+      self.dino_rect.y = self.Y_POS - self.rect_y_obstacle
+      
+    
   def run(self):
     self.image = RUNNING[0] if self.step_index < 5 else RUNNING[1]
     self.dino_rect = self.image.get_rect()

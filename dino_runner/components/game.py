@@ -1,8 +1,10 @@
 import pygame
+import random
 
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.components.dinosaur import Dinosaur
-from dino_runner.components.background_accessories.clouds import Cloud
+from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
+from dino_runner.components.background_accessories.accesoriesmanager import AccesoriesManager
 
 class Game:
     def __init__(self):
@@ -12,11 +14,13 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         self.clock = pygame.time.Clock()
         self.playing = False
+        self.delay_end_game = False
         self.game_speed = 5
         self.x_pos_bg = 0
         self.y_pos_bg = 380
         self.player = Dinosaur()
-        self.cloud = Cloud()
+        self.accesories_manager = AccesoriesManager()
+        self.obstacle_manager = ObstacleManager()
 
     def run(self):
         # Game loop: events - update - draw
@@ -25,6 +29,7 @@ class Game:
             self.events()
             self.update()
             self.draw()
+        pygame.time.delay(500)
         pygame.quit()
 
     def events(self):
@@ -35,14 +40,19 @@ class Game:
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update()
-        self.cloud.update()
+        self.accesories_manager.update(random.randrange(5, 15))
+        self.obstacle_manager.update(self.game_speed,self.player)
+        if self.player.dino_dead: 
+            if self.delay_end_game: self.playing = False
+            self.delay_end_game =True
 
     def draw(self):
         self.clock.tick(FPS)
         self.screen.fill((36, 36, 36))
         self.draw_background()
         self.player.draw(self.screen)
-        self.cloud.draw(self.screen)
+        self.accesories_manager.draw(self.screen)
+        self.obstacle_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
