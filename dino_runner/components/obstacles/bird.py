@@ -6,13 +6,11 @@ class Bird(Obstacle):
   Y_POS_BIRD_1 = 300
   Y_POS_BIRD_2 = 200
   Y_POS_BIRD_3 = 100
-  X_POS_BIRD = SCREEN_WIDTH + ((SCREEN_WIDTH/2)/2)
   
   def __init__(self):
     self.image = BIRD[0]
     super().__init__(self.image)
     self.rect.y = 100 #self.random_pos_y()
-    self.rect.x = self.X_POS_BIRD
     
   def random_pos_y(self):
     random_pos = random.randrange(1,4)
