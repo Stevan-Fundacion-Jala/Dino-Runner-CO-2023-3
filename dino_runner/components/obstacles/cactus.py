@@ -6,9 +6,9 @@ class Cactus(Obstacle):
   Y_POS_CACTUS = 325
   
   def __init__(self):
-    random_cactus_zise = 1 #random.randrange(1,3)
+    random_cactus_zise = random.randrange(1,3)
     if random_cactus_zise == 1: 
-      self.image = SMALL_CACTUS[0] #random.choice(SMALL_CACTUS)
+      self.image = random.choice(SMALL_CACTUS)
       self.Y_POS_CACTUS = 325
     else: 
       self.image = random.choice(LARGE_CACTUS)

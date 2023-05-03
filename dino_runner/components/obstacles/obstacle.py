@@ -13,14 +13,14 @@ class Obstacle:
     if id == 0: self.rect.x -= game_speed
     else:
       self.image = BIRD[0] if sprite < 5 else BIRD[1]
-      if self.rect.x > (SCREEN_WIDTH-(SCREEN_WIDTH/4)):
+      if self.rect.x > (SCREEN_WIDTH-100):
         self.rect.x = pos_x + (SCREEN_WIDTH/4)
       else: self.rect.x -= game_speed
     if self.rect.colliderect(player.dino_rect):
       player.collider = True
       player.rect_x_obstacle = self.rect.x
       player.rect_y_obstacle = self.image.get_height()
-      player.dino_dead = True
+      #player.dino_dead = True
 
   def draw(self,screen):
     screen.blit(self.image,self.rect)
