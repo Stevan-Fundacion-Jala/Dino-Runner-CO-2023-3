@@ -4,7 +4,7 @@ import random
 from dino_runner.utils.constants import BG, ICON, SCREEN_HEIGHT, SCREEN_WIDTH, TITLE, FPS
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
-from dino_runner.components.background_accessories.accesoriesmanager import AccesoriesManager
+from dino_runner.components.background_accessories.accesories_manager import AccesoriesManager
 
 class Game:
     def __init__(self):
@@ -40,7 +40,7 @@ class Game:
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update()
-        self.accesories_manager.update(random.randrange(5, 15))
+        self.accesories_manager.update()
         self.obstacle_manager.update(self.game_speed,self.player)
         if self.player.dino_dead: 
             if self.delay_end_game: self.playing = False
