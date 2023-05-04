@@ -1,4 +1,5 @@
 import keyboard
+import pygame
 from dino_runner.utils.constants import (JUMPING, RUNNING, DUCKING, DEAD,
                                         JUMPING_SHIELD, RUNNING_SHIELD, DUCKING_SHIELD,
                                         JUMPING_HAMMER, RUNNING_HAMMER, DUCKING_HAMMER,
@@ -30,6 +31,9 @@ class Dinosaur:
     self.rect_y_obstacle = 0
     self.rect_x_obstacle = 0
     self.collider = False
+    self.shield = False
+    self.time_up_power_up = 0
+    self.lowered_speed = False
   
   def update(self):
     if self.dino_dead: self.dead()
@@ -52,6 +56,11 @@ class Dinosaur:
     
     if self.step_index >= 10:
       self.step_index = 0
+      
+    if self.shield:
+      time_to_show = round((self.time_up_power_up - pygame.time.get_ticks())/ 1000, 2)
+      if time_to_show < 0:
+        self.reset()
   
   def draw(self,screen):
     screen.blit(self.image,self.dino_rect)
@@ -81,13 +90,29 @@ class Dinosaur:
     self.image = self.jump_img[self.type]
     if self.dino_jump:
       self.dino_rect.y -= self.jump_vel * 2
-      self.jump_vel -= 0.4
+    if keyboard.is_pressed(self.BOTTOM_DUCK):
+      self.lowered_speed = down_press()
+    if self.lowered_speed:
+      self.jump_vel -= 0.8
+    else: 
+        self.jump_vel -= 0.4
     if self.jump_vel < -self.JUMP_VEL:
+      self.lowered_speed = False
       self.dino_rect.y = self.Y_POS
       self.dino_jump = False
       self.jump_vel = self.JUMP_VEL
       
   def set_power_up(self, power_up):
-    if power_up == "DEFAULT_TYPE": self.type = DEFAULT_TYPE
-    elif power_up.type == SHIELD_TYPE: self.type = SHIELD_TYPE
+    if power_up.type == SHIELD_TYPE:
+      self.type = SHIELD_TYPE
+      self.shield = True
+      self.time_up_power_up = power_up.time_up
     elif power_up.type == HAMMER_TYPE: self.type = HAMMER_TYPE
+    
+  def reset(self):
+    self.type = DEFAULT_TYPE
+    self.shield = False
+    self.time_up_power_up = 0
+    
+def down_press():
+  return True
