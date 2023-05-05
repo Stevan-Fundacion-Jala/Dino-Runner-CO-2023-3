@@ -15,6 +15,13 @@ class PowerUp:
     self.time_up = 0
     self.used = False
     
+  def print_power_up(self,player):
+    self.rect.x = 40
+    if player.power_up_use:
+      self.rect.y = 40
+    else:
+      self.rect.y = -100
+    
   def update(self,game_speed,player):
     self.rect.x -= game_speed
     if self.rect.colliderect(player.dino_rect):

@@ -34,13 +34,13 @@ class ObstacleManager:
         self.set_pos_sprites.remove(self.set_pos_sprites[i])
         self.set_pos_sprites.append(Bird())
       self.set_pos_sprites[i].update(game_speed,player,0,0,0)
-    
+      
     for i in range(len(self.obstacle_1)):
       if self.obstacle_1[i].rect.x < -self.obstacle_1[i].rect.width:
         self.obstacle_1.remove(self.obstacle_1[i])
         self.obstacle_1.append(Cactus())
       self.obstacle_1[i].update(game_speed,player,2,self.set_pos_sprites[i].rect.x,0)
-    
+
     for i in range(len(self.obstacle_2)):
       self.step_index += 0.2
       if self.obstacle_2[i].rect.x < -self.obstacle_2[i].rect.width:

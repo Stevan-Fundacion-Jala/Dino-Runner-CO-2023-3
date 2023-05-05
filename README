@@ -1,0 +1,45 @@
+inicia el juego presionando cualquier tecla del teclado
+de igual manera para reiniciar el juego
+
+controles:
+Pausa: "Enter"
+Salto: "Space"
+Bajar mientras estas en el aire: "Down"
+Agacharse: "Down"
+
+Funciones:
+1. Escudo: Invulnerabilidad
+2. Martillo: Destruye los obstaculos
+3. Acelerador: aumenta la velocidad del dinosaurio y a su vez consigue puntos mas rapido
+4. despues del salto presionand "Down" puedes bajar rapidamente
+
+objetivo:
+1. llegar a la mayor cantidad de puntos
+2. No tocar ningun obstaculo
+
+añadido:
+- añadi algunos sprites al juego como:
+  - mdificación sprite escudo
+  - animacion de muerte
+  - dos variantes de las nubes
+  - modificación en los sprites para colision
+  - sprite acelerador
+
+- Implementaciones al juego:
+  - agregue doble cactus y doble ave en los obstaculos
+  - agruegue movimiento de nubes en cantidad con velocidad aleatoria
+  - agregue funcionalidad del martillo
+  - agregue acelerador
+  - agregue visualización del tiempo del powerup
+    - cada power up aparece segun los puntos en un rango aleatorio
+  - agregue salto y bajada rapida
+  - agregue pausa al juego
+
+- funciones sin terminar:
+  - interfaz
+  - sprites skin
+  - sprite botones
+  - hammer lanzable
+  - configuracion basica
+  - interfaz de pausa mas definida
+  (Estas son alguna funciones que se podrian terminar en un futuro)

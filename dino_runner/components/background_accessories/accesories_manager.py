@@ -8,7 +8,7 @@ class AccesoriesManager:
     self.accesories = []
     self.cloud = Cloud()
     self.pos_x = SCREEN_WIDTH
-    self.max_cloud = 30
+    self.max_cloud = 20
     self.move_pos_x = int((SCREEN_WIDTH/self.max_cloud))
     for i in range(self.max_cloud):
       self.accesories.append(Cloud())

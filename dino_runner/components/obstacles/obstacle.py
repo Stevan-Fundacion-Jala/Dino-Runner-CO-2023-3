@@ -21,8 +21,10 @@ class Obstacle:
       player.collider = True
       player.rect_x_obstacle = self.rect.x
       player.rect_y_obstacle = self.image.get_height()
-      if not player.shield:
-        player.dino_dead = True
+      if not player.shield and not player.hammer and not player.accelerator:
+        player.dino_dead[0] = True
+      if player.hammer or player.accelerator:
+        self.rect.y = -100
 
   def draw(self,screen):
     screen.blit(self.image,self.rect)
